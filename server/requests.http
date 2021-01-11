@@ -1,0 +1,24 @@
+### グループの取得
+GET http://localhost:3000/groups?user_id=1
+Accept: application/json
+
+### グループへの参加表明
+POST http://localhost:3000/candidates
+Content-Type: application/json
+
+{
+  "user_id": 1
+}
+
+### グループの投稿を取得
+GET http://localhost:3000/groups/1/statements
+Accept: application/json
+
+### グループへ投稿
+POST http://localhost:3000/groups/1/statements
+Content-Type: application/json
+
+{
+  "user_id": 1,
+  "content": "test"
+}
