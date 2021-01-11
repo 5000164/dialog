@@ -12,4 +12,20 @@ namespace :dialog do
     avatar.save
     Rails.logger.info "#{task.name}: アバターを追加しました"
   end
+
+  desc 'グループを作成する'
+  task create_group: :environment do |task|
+    ActiveRecord::Base.transaction do
+      group_expired_at = DateTime.now + 7
+      group = Group.new(expired_at: group_expired_at)
+      group.save
+      avatars = Avatar.all.sample(4)
+      Candidate.all.sample(4).map.with_index { |candidate, index|
+        user_group = UserGroup.new(user_id: candidate.user_id, group_id: group.group_id, avatar_id: avatars[index].avatar_id)
+        user_group.save
+        candidate.destroy
+      }
+    end
+    Rails.logger.info "#{task.name}: グループを作成しました"
+  end
 end
