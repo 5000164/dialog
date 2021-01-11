@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: Dialog API
+  version: 0.0.1
+servers:
+  - url: http://localhost:3000
+    description: ローカルサーバー
+paths:
+  /groups:
+    get:
+      summary: ユーザーが所属しているグループの一覧
+      parameters:
+        - in: query
+          name: user_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: "正常"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groups:
+                    type: array
+                    items:
+                      type: integer
+                required:
+                  - groups
+  /groups/{group_id}/statements:
+    get:
+      summary: グループの発言一覧
+      parameters:
+        - in: path
+          name: group_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: "正常"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statements:
+                    type: array
+                    items:
+                      type: string
+                required:
+                  - statements
+    post:
+      summary: 発言をする
+      parameters:
+        - in: path
+          name: group_id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                content:
+                  type: string
+              required:
+                - user_id
+                - content
+      responses:
+        '201':
+          description: "正常"
+  /candidates:
+    post:
+      summary: グループへの参加を表明する
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+              required:
+                - user_id
+      responses:
+        '201':
+          description: "正常"
