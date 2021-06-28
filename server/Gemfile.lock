@@ -161,7 +161,6 @@ DEPENDENCIES
   rails (~> 6.1.0)
   ruby-debug-ide
   spring
-  tzinfo-data
 
 RUBY VERSION
    ruby 2.7.2p137
