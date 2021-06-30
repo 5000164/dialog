@@ -36,4 +36,5 @@ group :development do
   gem 'spring'
   gem 'ruby-debug-ide'
   gem 'debase'
+  gem 'rubocop', '~> 1.17', require: false
 end
